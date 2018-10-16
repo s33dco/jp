@@ -34,31 +34,36 @@ hbs.registerHelper('getCurrentYear', () => {
 // routes
 app.get('/',(req, res) => {
   res.render('home.hbs', {
-		pageTitle : `Home | ${app.locals.title}`
+		pageTitle       : `Home | ${app.locals.title}`,
+    pageDescription : "about"
 	});
 });
 
 app.get('/about',(req, res) => {
   res.render('about.hbs', {
-		pageTitle : `About | ${app.locals.title}`
+		pageTitle       : `About | ${app.locals.title}`,
+    pageDescription : "about"
 	});
 });
 
 app.get('/carpentry',(req, res) => {
   res.render('about.hbs', {
-		pageTitle : `Carpentry | ${app.locals.title}`
+		pageTitle       : `Carpentry | ${app.locals.title}`,
+    pageDescription : "about"
 	});
 });
 
 app.get('/gardening',(req, res) => {
   res.render('about.hbs', {
-		pageTitle : `Gardening | ${app.locals.title}`
+		pageTitle       : `Gardening | ${app.locals.title}`,
+    pageDescription : "about"
 	});
 });
 
 app.get('/contact',(req, res) => {
   res.render('contact.hbs', {
-		pageTitle : `Contact | ${app.locals.title}`
+		pageTitle       : `Contact | ${app.locals.title}`,
+    pageDescription : "about"
 	});
 });
 
