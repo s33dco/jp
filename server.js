@@ -35,7 +35,7 @@ hbs.registerHelper('getCurrentYear', () => {
 app.get('/',(req, res) => {
   res.render('home.hbs', {
 		pageTitle       : `Home | ${app.locals.title}`,
-    pageDescription : "about"
+    pageDescription : `Welcome to ${app.locals.title}`
 	});
 });
 
@@ -63,7 +63,14 @@ app.get('/gardening',(req, res) => {
 app.get('/contact',(req, res) => {
   res.render('contact.hbs', {
 		pageTitle       : `Contact | ${app.locals.title}`,
-    pageDescription : "about"
+    pageDescription : `Get in touch with ${app.locals.title}`
+	});
+});
+
+app.get('/thanks',(req, res) => {
+  res.render('thanks.hbs', {
+		pageTitle       : `Thanks | ${app.locals.title}`,
+    pageDescription : "thanks for your message"
 	});
 });
 
