@@ -44,6 +44,18 @@ app.get('/about',(req, res) => {
 	});
 });
 
+app.get('/carpentry',(req, res) => {
+  res.render('about.hbs', {
+		pageTitle : `Carpentry | ${app.locals.title}`
+	});
+});
+
+app.get('/gardening',(req, res) => {
+  res.render('about.hbs', {
+		pageTitle : `Gardening | ${app.locals.title}`
+	});
+});
+
 app.get('/contact',(req, res) => {
   res.render('contact.hbs', {
 		pageTitle : `Contact | ${app.locals.title}`
