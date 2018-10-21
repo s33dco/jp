@@ -74,12 +74,15 @@ app.get('/thanks',(req, res) => {
 	});
 });
 
-app.use((req, res) => {
-  // res.sendStatus(404);
-  res.render('404.hbs'), {
-		pageTitle       : `404 | ${app.locals.title}`,
-    pageDescription : "maybe try something else"
-	};
+// app.get('*', (req, res) => {
+//   res.render('404.hbs'), {
+//     pageTitle       : `404 | ${app.locals.title}`,
+//     pageDescription : "maybe try something else"
+//   };
+// });
+
+app.use(function(req, res, next){
+    res.status(404).render('404.hbs', {title: "Sorry, page not found"});
 });
 
 
