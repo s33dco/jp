@@ -4,18 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha **/*.test.js",
+    "test": "mocha server/**/*.test.js",
     "test-watch": "nodemon --exec \"npm test\""
   },
-  "author": "",
+  "author": "s33dco",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "fs": "0.0.1-security",
-    "hbs": "^4.0.1"
+    "hbs": "^4.0.1",
+    "mongodb": "^3.1.8",
+    "mongoose": "^5.3.4"
   },
   "devDependencies": {
+    "expect": "^23.6.0",
     "mocha": "^5.2.0",
+    "nodemon": "^1.18.4",
     "supertest": "^3.3.0"
   }
 }

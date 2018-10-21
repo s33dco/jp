@@ -8,7 +8,7 @@ const port      = process.env.PORT || 3000;
 let app = express();
 app.locals.title = 'Fixes';
 app.locals.email = 'hello@fixes.co.uk';
-hbs.registerPartials(__dirname + '/views/partials');
+hbs.registerPartials(__dirname + '/../views/partials');
 app.set('view engine', 'hbs');
 
 // set up logger
@@ -31,7 +31,7 @@ hbs.registerHelper('getCurrentYear', () => {
 });
 
 
-// routes
+// static pages
 app.get('/',(req, res) => {
   res.render('home.hbs', {
 		pageTitle       : `Home | ${app.locals.title}`,
@@ -74,6 +74,17 @@ app.get('/thanks',(req, res) => {
 	});
 });
 
+app.use((req, res) => {
+  // res.sendStatus(404);
+  res.render('404.hbs'), {
+		pageTitle       : `404 | ${app.locals.title}`,
+    pageDescription : "maybe try something else"
+	};
+});
+
+
 app.listen(port, () => {
 	console.log(`server running on ${port}`);
 });
+
+module.exports = {app};
