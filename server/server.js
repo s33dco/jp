@@ -1,6 +1,5 @@
 const express   = require('express');
 const hbs       = require('hbs');
-const fs        = require('fs');
 const bodyParser= require('body-parser');
 const morgan    = require('morgan');
 const port      = process.env.PORT || 3000;
@@ -10,25 +9,14 @@ const port      = process.env.PORT || 3000;
 let app = express();
 app.locals.title = 'Fixes';
 app.locals.email = 'hello@fixes.co.uk';
-hbs.registerPartials(__dirname + '/../views/partials');
 app.set('view engine', 'hbs');
+hbs.registerPartials(__dirname + '/../views/partials');
 
-// set up logger
 
-// app.use((req, res, next) => {
-//   let now = new Date().toString();
-// 	let log = `${now}: ${req.method} ${req.url}\nfrom ${req.ip} - ${req.headers['user-agent']}\n`;
-// 	console.log(log);
-// 	fs.appendFile('server.log', log + '\n', (err) => {
-// 		if (err) {
-// 			console.log('unable to append to server log.')
-// 		}
-// 	});
-// 	next();
-// });
+
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ extended: true }));
 
 // helpers
 hbs.registerHelper('getCurrentYear', () => {
@@ -38,10 +26,13 @@ hbs.registerHelper('getCurrentYear', () => {
 
 // static pages
 app.get('/',(req, res) => {
-  res.render('home.hbs', {
-		pageTitle       : `Home | ${app.locals.title}`,
-    pageDescription : `Welcome to ${app.locals.title}`
-	});
+	res.status(304).send({
+	name: 'here we are'
+});
+  // res.render('home.hbs', {
+	// 	pageTitle       : `Home | ${app.locals.title}`,
+  //   pageDescription : `Welcome to ${app.locals.title}`
+	// });
 });
 
 app.get('/about',(req, res) => {
@@ -81,25 +72,40 @@ app.get('/thanks',(req, res) => {
 
 app.get('/invoices',(req, res) => {
   res.render('invoices.hbs', {
-		pageTitle       : `Thanks | ${app.locals.title}`,
-    pageDescription : "thanks for your message"
+		pageTitle       : `Invoices | ${app.locals.title}`,
+    pageDescription : "Invoices Home"
 	});
 });
+
+app.post('/invoices',(req, res) => {
+  res.render('new_invoice.hbs', {
+		pageTitle       : `Create Invoice | ${app.locals.title}`,
+    pageDescription : "Create Invoice"
+	});
+});
+
+app.get('/invoices/:invoice_id',(req, res) => {
+  res.render('view_invoice.hbs', {
+		pageTitle       : `View Invoice | ${app.locals.title}`,
+    pageDescription : "View Invoice"
+	});
+});
+
+
+
+
+
 
 app.get('/clients',(req, res) => {
-  res.render('invoices.hbs', {
-		pageTitle       : `Thanks | ${app.locals.title}`,
-    pageDescription : "thanks for your message"
+  res.render('clients.hbs', {
+		pageTitle       : `Clients | ${app.locals.title}`,
+    pageDescription : "Clients Homes"
 	});
 });
 
 
 
-
-
-
-
-app.use(function(req, res, next){
+app.use((req, res, next) => {
     res.status(404).render('404.hbs', {title: "Sorry, page not found"});
 });
 
